@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Product | Rembo Agri</title>
+
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer">
+
+
+    <link rel="stylesheet"
+        href="./style.css">
+
+
+    <style>
+
+        /* ========================================================
+           Product Detail Page
+        ======================================================== */
+
+        .product-detail-page {
+            min-height: 100vh;
+            background: #fff;
+        }
+
+
+        .product-detail-header {
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.67),
+                    rgba(0, 0, 0, 0.67)
+                ),
+                url('./Images/import_export.png');
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+
+        .product-detail-navbar {
+            padding: 20px 0;
+        }
+
+
+        .product-detail-navbar .nav-link {
+            color: #fff !important;
+        }
+
+
+        .product-breadcrumb {
+            color: rgba(255, 255, 255, 0.75);
+            font-family: var(--font-style-1);
+            font-size: 13px;
+            letter-spacing: 0.3px;
+        }
+
+
+        .product-breadcrumb a {
+            color: #fff !important;
+        }
+
+
+        .product-detail-main {
+            padding: 90px 0;
+        }
+
+
+        .product-detail-image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #f5f7f8;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.09);
+        }
+
+
+        .product-detail-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+
+        .product-detail-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #0e76ba;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 50px;
+            font-family: var(--font-style-1);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+
+        .product-detail-info {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+
+        .product-detail-number {
+            color: #0e76ba;
+            font-family: var(--font-style-1);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+
+        .product-detail-title {
+            color: #2f2f2f;
+            font-family: var(--font-style-1);
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 22px;
+        }
+
+
+        .product-detail-overview {
+            color: #666;
+            font-family: var(--font-style-1);
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+
+        .product-detail-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #0e76ba;
+            color: #fff !important;
+            padding: 14px 22px;
+            border-radius: 7px;
+            font-family: var(--font-style-1);
+            font-size: 15px;
+            font-weight: 600;
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease;
+        }
+
+
+        .product-detail-whatsapp:hover {
+            background: #004975;
+            color: #fff !important;
+            transform: translateY(-2px);
+        }
+
+
+        .product-detail-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #0e76ba !important;
+            font-family: var(--font-style-1);
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 18px;
+        }
+
+
+        .product-detail-back:hover {
+            color: #004975 !important;
+        }
+
+
+        .product-specification-section {
+            background: rgba(14, 118, 186, 0.025);
+            padding: 80px 0;
+        }
+
+
+        .product-specification-title {
+            color: #2f2f2f;
+            font-family: var(--font-style-1);
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+
+        .product-specification-title span {
+            color: #0e76ba;
+        }
+
+
+        .product-specification-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+        }
+
+
+        .product-specification-row {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 17px 22px;
+        }
+
+
+        .product-specification-row:last-child {
+            border-bottom: none;
+        }
+
+
+        .product-specification-label {
+            width: 35%;
+            color: #0e76ba;
+            font-family: var(--font-style-1);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+
+        .product-specification-value {
+            width: 65%;
+            color: #555;
+            font-family: var(--font-style-1);
+            font-size: 14px;
+        }
+
+
+        .product-enquiry-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+
+        .product-enquiry-box {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 45px 30px;
+            border-radius: 16px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(14, 118, 186, 0.07),
+                    rgba(14, 118, 186, 0.015)
+                );
+        }
+
+
+        .product-enquiry-box h3 {
+            color: #2f2f2f;
+            font-family: var(--font-style-1);
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+
+        .product-enquiry-box p {
+            color: #666;
+            font-family: var(--font-style-1);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+
+        .product-detail-footer {
+            background: #3d3d3d;
+            color: #fff;
+        }
+
+
+        @media (max-width: 991px) {
+
+            .product-detail-main {
+                padding: 65px 0;
+            }
+
+            .product-detail-info {
+                margin-top: 40px;
+            }
+
+        }
+
+
+        @media (max-width: 767px) {
+
+            .product-detail-main {
+                padding: 45px 0;
+            }
+
+            .product-detail-title {
+                font-size: 34px;
+            }
+
+            .product-detail-overview {
+                font-size: 14px;
+            }
+
+            .product-specification-section,
+            .product-enquiry-section {
+                padding: 55px 0;
+            }
+
+            .product-specification-row {
+                display: block;
+            }
+
+            .product-specification-label,
+            .product-specification-value {
+                width: 100%;
+                display: block;
+            }
+
+            .product-specification-value {
+                margin-top: 5px;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .product-detail-title {
+                font-size: 30px;
+            }
+
+            .product-detail-image-container {
+                border-radius: 10px;
+            }
+
+            .product-enquiry-box {
+                padding: 35px 20px;
+            }
+
+            .product-enquiry-box h3 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="product-detail-page">
+
+
+    <!-- Product Header -->
+
+    <header class="product-detail-header">
+
+        <nav class="navbar navbar-expand-lg product-detail-navbar">
+
+            <div class="container">
+
+                <a class="navbar-brand"
+                    href="./index.html">
+
+                    <img src="./Images/logo.png"
+                        class="logo"
+                        alt="Rembo Agri logo">
+
+                </a>
+
+
+                <button
+                    class="navbar-toggler border-0"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#productNavbar"
+                    aria-controls="productNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+
+                    <i class="fa-solid fa-bars text-white fw-bold fs-3"></i>
+
+                </button>
+
+
+                <div class="collapse navbar-collapse"
+                    id="productNavbar">
+
+                    <ul class="navbar-nav ms-auto fw-semibold text-uppercase">
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                                href="./index.html">
+                                Home
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                                href="./index.html#products">
+                                Products
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                                href="./index.html#about_us">
+                                About Us
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                                href="./index.html#contact_us">
+                                Contact Us
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+        <div class="container pb-4">
+
+            <div class="product-breadcrumb">
+
+                <a href="./index.html">
+                    Home
+                </a>
+
+                <span class="mx-2">
+                    /
+                </span>
+
+                <a href="./index.html#products">
+                    Products
+                </a>
+
+                <span class="mx-2">
+                    /
+                </span>
+
+                <span id="breadcrumb-product">
+                    Product
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- Product Main -->
+
+    <main>
+
+
+        <section class="product-detail-main">
+
+            <div class="container">
+
+                <div class="row align-items-center g-5">
+
+
+                    <div class="col-lg-6">
+
+                        <div class="product-detail-image-container">
+
+                            <span class="product-detail-tag">
+                                REMBO AGRI
+                            </span>
+
+                            <img
+                                id="product-detail-image"
+                                src=""
+                                alt="Product">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-lg-6">
+
+                        <div class="product-detail-info">
+
+
+                            <div class="product-detail-number"
+                                id="product-detail-number">
+                                PRODUCT
+                            </div>
+
+
+                            <h1
+                                class="product-detail-title"
+                                id="product-detail-title">
+                                Product
+                            </h1>
+
+
+                            <p
+                                class="product-detail-overview"
+                                id="product-detail-overview">
+                            </p>
+
+
+                            <div>
+
+                                <a
+                                    href="#"
+                                    id="product-whatsapp"
+                                    class="product-detail-whatsapp"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+
+                                    <i class="fa-brands fa-whatsapp"></i>
+
+                                    <span>
+                                        Enquire on WhatsApp
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+
+                            <a
+                                href="./index.html#products"
+                                class="product-detail-back">
+
+                                <i class="fa-solid fa-arrow-left"></i>
+
+                                Back to Products
+
+                            </a>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Product Specifications -->
+
+        <section class="product-specification-section">
+
+            <div class="container">
+
+                <h2 class="product-specification-title">
+
+                    Product <span>Details</span>
+
+                </h2>
+
+
+                <div
+                    class="product-specification-card"
+                    id="product-specifications">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Product Enquiry -->
+
+        <section class="product-enquiry-section">
+
+            <div class="container">
+
+                <div class="product-enquiry-box">
+
+                    <h3>
+                        Interested in this product?
+                    </h3>
+
+                    <p>
+                        Contact Rembo Agri directly for product specifications,
+                        packaging requirements, availability and export enquiries.
+                    </p>
+
+
+                    <a
+                        href="#"
+                        id="product-whatsapp-bottom"
+                        class="product-detail-whatsapp"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        <i class="fa-brands fa-whatsapp"></i>
+
+                        Get Product Details on WhatsApp
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer class="product-detail-footer text-center">
+
+        <div class="container py-4">
+
+            <p class="mb-0">
+
+                © 2023 Rembo Agri
+
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous">
+    </script>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous">
+    </script>
+
+
+    <script>
+
+        // ========================================================
+        // Product Detail Data
+        // ========================================================
+
+        const products = [
+
+            {
+                id: "chilli-powder",
+
+                name: "Chilli Powder",
+
+                overview:
+                    "Premium chilli powder prepared for consistent colour, aroma and flavour in food applications.",
+
+                image:
+                    "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=90",
+
+                details: {
+                    "Product Name": "Chilli Powder",
+                    "Origin": "India",
+                    "Form": "Powder",
+                    "Quality": "Export-quality specification",
+                    "Packaging": "Available as per buyer requirement",
+                    "Applications": "Food preparation, seasoning and food processing",
+                    "Export Availability": "Subject to order and export requirements"
+                }
+
+            },
+
+
+            {
+                id: "coriander-powder",
+
+                name: "Coriander Powder",
+
+                overview:
+                    "Aromatic coriander powder suitable for seasoning, food preparation and commercial food applications.",
+
+                image:
+                    "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=90",
+
+                details: {
+                    "Product Name": "Coriander Powder",
+                    "Origin": "India",
+                    "Form": "Powder",
+                    "Quality": "Export-quality specification",
+                    "Packaging": "Available as per buyer requirement",
+                    "Applications": "Seasoning, culinary preparation and food processing",
+                    "Export Availability": "Subject to order and export requirements"
+                }
+
+            },
+
+
+            {
+                id: "coriander-seeds",
+
+                name: "Coriander Seeds",
+
+                overview:
+                    "Selected coriander seeds with natural aroma and flavour for culinary and food-processing applications.",
+
+                image:
+                    "https://images.unsplash.com/photo-1726750597665-8c6d0f65f6f8?auto=format&fit=crop&w=1200&q=90",
+
+                details: {
+                    "Product Name": "Coriander Seeds",
+                    "Origin": "India",
+                    "Form": "Whole Seeds",
+                    "Quality": "Export-quality specification",
+                    "Packaging": "Available as per buyer requirement",
+                    "Applications": "Cooking, seasoning and spice processing",
+                    "Export Availability": "Subject to order and export requirements"
+                }
+
+            },
+
+
+            {
+                id: "ajwain",
+
+                name: "Ajwain",
+
+                overview:
+                    "Aromatic ajwain seeds selected for culinary, seasoning and traditional food applications.",
+
+                image:
+                    "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=1200&q=90",
+
+                details: {
+                    "Product Name": "Ajwain",
+                    "Origin": "India",
+                    "Form": "Whole Seeds",
+                    "Quality": "Export-quality specification",
+                    "Packaging": "Available as per buyer requirement",
+                    "Applications": "Culinary preparation, seasoning and food processing",
+                    "Export Availability": "Subject to order and export requirements"
+                }
+
+            },
+
+
+            {
+                id: "cumin-jeera",
+
+                name: "Cumin / Jeera",
+
+                overview:
+                    "Carefully selected cumin seeds known for their distinctive aroma and flavour.",
+
+                image:
+                    "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=90",
+
+                details: {
+                    "Product Name": "Cumin / Jeera",
+                    "Origin": "India",
+                    "Form": "Whole Seeds",
+                    "Quality": "Export-quality specification",
+                    "Packaging": "Available as per buyer requirement",
+                    "Applications": "Cooking, seasoning and spice processing",
+                    "Export Availability": "Subject to order and export requirements"
+                }
+
+            }
+
+        ];
+
+
+        // ========================================================
+        // Get Product From URL
+        // ========================================================
+
+        const params = new URLSearchParams(window.location.search);
+
+        const productId = params.get("product");
+
+
+        const product =
+            products.find(item => item.id === productId);
+
+
+        // ========================================================
+        // WhatsApp URL
+        // ========================================================
+
+        function createWhatsAppUrl(productName) {
+
+            const phoneNumber = "919409319017";
+
+            const message =
+                `Hello Rembo Agri, I would like to get more details about ${productName}.`;
+
+            return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+        }
+
+
+        // ========================================================
+        // Render Product
+        // ========================================================
+
+        function renderProduct() {
+
+            if (!product) {
+
+                document.title = "Product Not Found | Rembo Agri";
+
+                document.getElementById("product-detail-title").textContent =
+                    "Product Not Found";
+
+                document.getElementById("product-detail-overview").textContent =
+                    "The requested product could not be found. Please return to the Products section and select a product.";
+
+                document.getElementById("product-detail-image").style.display =
+                    "none";
+
+                document.getElementById("product-whatsapp").style.display =
+                    "none";
+
+                document.getElementById("product-whatsapp-bottom").style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            // Page title
+
+            document.title =
+                `${product.name} | Rembo Agri`;
+
+
+            // Breadcrumb
+
+            document.getElementById("breadcrumb-product").textContent =
+                product.name;
+
+
+            // Product number
+
+            const productIndex =
+                products.findIndex(item => item.id === product.id) + 1;
+
+
+            document.getElementById("product-detail-number").textContent =
+                `PRODUCT ${String(productIndex).padStart(2, "0")}`;
+
+
+            // Product name
+
+            document.getElementById("product-detail-title").textContent =
+                product.name;
+
+
+            // Overview
+
+            document.getElementById("product-detail-overview").textContent =
+                product.overview;
+
+
+            // Image
+
+            const productImage =
+                document.getElementById("product-detail-image");
+
+
+            productImage.src =
+                product.image;
+
+
+            productImage.alt =
+                product.name;
+
+
+            // WhatsApp
+
+            const whatsappUrl =
+                createWhatsAppUrl(product.name);
+
+
+            document.getElementById("product-whatsapp").href =
+                whatsappUrl;
+
+
+            document.getElementById("product-whatsapp-bottom").href =
+                whatsappUrl;
+
+
+            // Specifications
+
+            const specifications =
+                document.getElementById("product-specifications");
+
+
+            specifications.innerHTML =
+                Object.entries(product.details)
+                    .map(([label, value]) => {
+
+                        return `
+
+                            <div class="product-specification-row">
+
+                                <div class="product-specification-label">
+
+                                    ${label}
+
+                                </div>
+
+                                <div class="product-specification-value">
+
+                                    ${value}
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    })
+                    .join("");
+
+        }
+
+
+        // ========================================================
+        // Initialize
+        // ========================================================
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            renderProduct
+        );
+
+    </script>
+
+</body>
+
+</html>
